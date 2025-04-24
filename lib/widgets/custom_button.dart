@@ -15,7 +15,6 @@ class CustomButton extends StatelessWidget {
   Color? textColor;
   bool? color;
   bool? gradient;
-
   bool wdth;
 
   @override
