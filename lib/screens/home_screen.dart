@@ -1,10 +1,10 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:travia/data/colors.dart';
 import 'package:travia/data/controllers_and_vars.dart';
+import 'package:travia/screens/qns_screen.dart';
 import 'package:travia/widgets/custom_appbar.dart';
 
 import 'package:travia/widgets/custom_button.dart';
@@ -42,7 +42,13 @@ class _HomeScreenState extends State<HomeScreen> {
               height: height * 0.05,
             ),
             CustomButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) =>
+                            QnsScreen(categoryType: "General Knowledge")));
+              },
               text: "General Knowledge",
             ),
             SizedBox(
