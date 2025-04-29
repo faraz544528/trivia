@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travia/screens/final_score_screen.dart';
 import 'package:travia/screens/home_screen.dart';
 import 'package:travia/screens/onbording.dart';
 import 'package:travia/screens/qns_screen.dart';
@@ -21,6 +22,6 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
         ),
-        home: HomeScreen());
+        home: SplashScreen());
   }
 }

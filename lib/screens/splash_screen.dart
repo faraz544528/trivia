@@ -11,10 +11,29 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+
+    tween();
+  }
+
+  late AnimationController animationController;
+  late Animation animation;
+  tween() {
+    animationController =
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
+    animation = Tween(begin: 0.0, end: 300.0).animate(animationController);
+
+    animationController.addListener(
+      () {
+        print(animation.value);
+        setState(() {});
+      },
+    );
+    animationController.forward();
     Timer(
       Duration(seconds: 3),
       () {
@@ -36,9 +55,13 @@ class _SplashScreenState extends State<SplashScreen> {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter)),
         child: Center(
-            child: Image(
-                image: AssetImage(
-                    "assets/Screenshot_2025-04-23_011129-removebg-preview.png"))),
+            child: SizedBox(
+          height: animation.value,
+          width: animation.value,
+          child: Image(
+              image: AssetImage(
+                  "assets/Screenshot_2025-04-23_011129-removebg-preview.png")),
+        )),
       ),
     );
   }

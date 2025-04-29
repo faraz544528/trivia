@@ -36,6 +36,7 @@ class _QnsScreenState extends State<QnsScreen> {
       }
     }
   }
+// still got an error
 
   // questions() {
   //   setState(() {
@@ -83,10 +84,15 @@ class _QnsScreenState extends State<QnsScreen> {
                 // debugPrint(
                 //     '-----> Inside Function Call -----> Data : $dataReceived');
               },
-              text: "hit",
+              text: "True",
               color: true,
               gradient: false,
             ),
+            CustomButton(
+              onPressed: () {},
+              color: true,
+              gradient: false,
+            )
           ],
         ),
       ),
