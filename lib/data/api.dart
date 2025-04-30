@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
+var result;
+
 class QuestionAPI {
   // https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=boolean --> GeneralKnowledge
   // https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=boolean --> Sports
@@ -22,6 +24,6 @@ class QuestionAPI {
     debugPrint('----------> QNS : ${decodedData['results'][0]["question"]}\n');
     debugPrint('------------> Status Code : ${data.statusCode}\n');
 
-    return decodedData['results'];
+    return result = decodedData['results'];
   }
 }
