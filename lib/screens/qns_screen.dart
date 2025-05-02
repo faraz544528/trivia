@@ -25,6 +25,7 @@ class _QnsScreenState extends State<QnsScreen> {
   }
 
   var i = 0;
+  var icon;
 
   fetchCorrectData() async {
     if (widget.categoryType == 'General Knowledge') {
@@ -58,6 +59,54 @@ class _QnsScreenState extends State<QnsScreen> {
     });
   }
 
+  resultforTrue() {
+    if (result[i]["correct_answer"] == "True") {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Correct Answer")));
+
+      icon = Icon(
+        FontAwesomeIcons.check,
+        color: Colors.green,
+      );
+      setState(() {
+        if (i < result.length - 1) {
+          i++;
+        } else {
+          i = 0;
+        }
+      });
+      return icon;
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Incorrect Answer")));
+      icon = Icon(
+        Icons.close,
+        color: Colors.red,
+      );
+      setState(() {
+        if (i < result.length - 1) {
+          i++;
+        } else {
+          i = 0;
+        }
+      });
+      return icon;
+    }
+  }
+
+  // resultforFalse() {
+  //   if (result[i]["correct_answer"] == "False") {
+
+  //   }
+  //   setState(() {
+  //     if (i < result.length - 1) {
+  //       i++;
+  //     } else {
+  //       i = 0;
+  //     }
+  //   });
+  // }
+
   @override
   Widget build(BuildContext context) {
     debugPrint(
@@ -76,22 +125,12 @@ class _QnsScreenState extends State<QnsScreen> {
                   : Text("Loading Questions....."),
             ),
             Row(
-              children: [
-                Icon(
-                  Icons.close,
-                  color: Colors.red,
-                )
-              ],
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [icon],
             ),
             CustomButton(
               onPressed: () async {
-                setState(() {
-                  if (i < result.length - 1) {
-                    i++;
-                  } else {
-                    i = 0;
-                  }
-                });
+                resultforTrue();
               },
               text: "True",
               color: true,
