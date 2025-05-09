@@ -33,41 +33,49 @@ class _UserAuthScreenState extends State<UserAuthScreen> {
     var width = MediaQuery.sizeOf(context).width;
     return Scaffold(
       appBar: CustomAppbar(text: "Welcome To Travia Challenge"),
-      body: Center(
-        child: Column(
-          children: [
-            SizedBox(height: height * 0.1),
-            userAvatar(
-              photoUrl: null,
-              selectedImageBytes: selectedImage,
-              onPickImage: uploadImage,
-            ),
-            SizedBox(height: height * 0.2),
-            SizedBox(
-              width: width * 0.6,
-              child: TextField(
-                controller: nameController,
-                decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(style: BorderStyle.solid)),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: BorderSide(color: bgClrDark))),
+      body: Stack(children: [
+        SizedBox(
+            height: double.infinity,
+            width: double.infinity,
+            child: Image(
+                fit: BoxFit.fill,
+                image: AssetImage("assets/Pink Clouds Wallpaper.jpeg"))),
+        Center(
+          child: Column(
+            children: [
+              SizedBox(height: height * 0.1),
+              userAvatar(
+                photoUrl: null,
+                selectedImageBytes: selectedImage,
+                onPickImage: uploadImage,
               ),
-            ),
-            SizedBox(height: height * 0.1),
-            CustomButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()));
-              },
-              text: "SUBMIT",
-              textColor: white,
-            )
-          ],
+              SizedBox(height: height * 0.2),
+              SizedBox(
+                width: width * 0.6,
+                child: TextField(
+                  controller: nameController,
+                  decoration: InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(style: BorderStyle.solid)),
+                      focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          borderSide: BorderSide(color: bgClrDark))),
+                ),
+              ),
+              SizedBox(height: height * 0.1),
+              CustomButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                },
+                text: "SUBMIT",
+                textColor: white,
+              )
+            ],
+          ),
         ),
-      ),
+      ]),
     );
   }
 }

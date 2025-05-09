@@ -46,23 +46,26 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-            gradient: LinearGradient(
-                colors: [bgClr, bgClrDark],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter)),
-        child: Center(
-            child: SizedBox(
-          height: animation.value,
-          width: animation.value,
-          child: Image(
-              image: AssetImage(
-                  "assets/Screenshot_2025-04-23_011129-removebg-preview.png")),
-        )),
-      ),
+      body: Stack(children: [
+        SizedBox(
+            height: double.infinity,
+            width: double.infinity,
+            child: Image(
+                fit: BoxFit.fill,
+                image: AssetImage("assets/Pink Clouds Wallpaper.jpeg"))),
+        Container(
+          height: double.infinity,
+          width: double.infinity,
+          child: Center(
+              child: SizedBox(
+            height: animation.value,
+            width: animation.value,
+            child: Image(
+                image: AssetImage(
+                    "assets/Screenshot_2025-04-23_011129-removebg-preview.png")),
+          )),
+        ),
+      ]),
     );
   }
 }

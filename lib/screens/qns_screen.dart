@@ -35,6 +35,7 @@ class _QnsScreenState extends State<QnsScreen> {
   fetchCorrectData() async {
     if (widget.categoryType == 'General Knowledge') {
       result = await QuestionAPI().fetchapi("9");
+
       debugPrint("----------------------> API RESPONSE : $result");
 
       if (result != null) {
@@ -43,6 +44,21 @@ class _QnsScreenState extends State<QnsScreen> {
       } else {
         debugPrint('------------> Error While Hitting API');
       }
+      questions();
+    }
+    if (widget.categoryType == 'Sports') {
+      result = await QuestionAPI().fetchapi('21');
+      debugPrint('-------> Fetch Sports Questions\nQuestions : $result');
+      questions();
+    }
+    if (widget.categoryType == 'Technology') {
+      result = await QuestionAPI().fetchapi('18');
+      debugPrint('-------> Fetch Technology Questions\nQuestions : $result');
+      questions();
+    }
+    if (widget.categoryType == 'Vehicles') {
+      result = await QuestionAPI().fetchapi('28');
+      debugPrint('-------> Fetch Vehicles Questions\nQuestions : $result');
       questions();
     }
   }
@@ -162,60 +178,89 @@ class _QnsScreenState extends State<QnsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.sizeOf(context).height;
+    var width = MediaQuery.sizeOf(context).width;
     // debugPrint(
     //     '-----------------------------------------------------> This :::: ${result != null ? result[0]["question"] : 'Raakib'}\n\n\n');
     debugPrint("----------------------> API RESPONSE : $result");
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 300,
-              width: 300,
-              child: result != null
-                  ? Text(result[i]['question'].toString())
-                  : Text("Loading Questions....."),
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children:
-                    // Text(icon.toString()),
-                    icon.map((element) => element).toList(),
-              ),
-            ),
-
-            // SizedBox(
-            //   height: 60,
-            //   width: double.infinity,
-            //   child: ListView.builder(
-            //     scrollDirection: Axis.horizontal,
-            //     itemCount: result.length,
-            //     itemBuilder: (context, index) {
-            //       return Text(icon.toString());
-            //     },
-            //   ),
-            // ),
-            CustomButton(
-              onPressed: () async {
-                resultforTrue();
-              },
-              text: "True",
-              color: true,
-              gradient: false,
-            ),
-            CustomButton(
-              onPressed: () {
-                resultforFalse();
-              },
-              text: "False",
-              color: false,
-              gradient: false,
-            )
-          ],
+      body: Stack(children: [
+        SizedBox(
+          height: double.infinity,
+          width: double.infinity,
+          child: Image(
+              fit: BoxFit.fill,
+              image: AssetImage("assets/Pink Clouds Wallpaper.jpeg")),
         ),
-      ),
+        Expanded(child: Text("")),
+        Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(40),
+                child: SizedBox(
+                  height: height * 0.3,
+                  width: width * 0.6,
+                  child: result != null
+                      ? Center(
+                          child: RichText(
+                              text: TextSpan(
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 30),
+                                  children: [
+                                TextSpan(
+                                    text: result[i]['question'].toString()),
+                              ])),
+                        )
+                      : Text(
+                          "Loading Questions.....",
+                          style: TextStyle(fontSize: 30),
+                        ),
+                ),
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children:
+                      // Text(icon.toString()),
+                      icon.map((element) => element).toList(),
+                ),
+              ),
+              SizedBox(height: height * 0.02),
+
+              // SizedBox(
+              //   height: 60,
+              //   width: double.infinity,
+              //   child: ListView.builder(
+              //     scrollDirection: Axis.horizontal,
+              //     itemCount: result.length,
+              //     itemBuilder: (context, index) {
+              //       return Text(icon.toString());
+              //     },
+              //   ),
+              // ),
+              CustomButton(
+                onPressed: () async {
+                  resultforTrue();
+                },
+                text: "True",
+                color: true,
+                gradient: false,
+              ),
+              CustomButton(
+                onPressed: () {
+                  resultforFalse();
+                },
+                text: "False",
+                color: false,
+                gradient: false,
+              )
+            ],
+          ),
+        ),
+      ]),
     );
   }
 }

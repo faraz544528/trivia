@@ -24,31 +24,38 @@ class _OnbordingState extends State<Onbording> {
                 colors: [bgClr, bgClrDark],
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter)),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image(
-                  image: AssetImage(
-                      "assets/Screenshot_2025-04-23_000852-removebg-preview.png")),
-              SizedBox(height: height * 0.1),
-              Text(
-                "Find Quizez to Test Out Your\n                Knowledge",
-                style: TextStyle(color: white, fontSize: 20),
-              ),
-              SizedBox(height: height * 0.1),
-              CustomButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => UserAuthScreen()));
-                },
-                text: "Let's Start",
-              )
-            ],
+        child: Stack(children: [
+          SizedBox(
+              height: double.infinity,
+              width: double.infinity,
+              child: Image(
+                  fit: BoxFit.fill,
+                  image: AssetImage("assets/Pink Clouds Wallpaper.jpeg"))),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image(
+                    image: AssetImage(
+                        "assets/Screenshot_2025-04-23_000852-removebg-preview.png")),
+                Text(
+                  "Find Quizez to Test Out Your\n                Knowledge",
+                  style: TextStyle(fontSize: 30),
+                ),
+                SizedBox(height: height * 0.1),
+                CustomButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => UserAuthScreen()));
+                  },
+                  text: "Let's Start",
+                )
+              ],
+            ),
           ),
-        ),
+        ]),
       ),
     );
   }
